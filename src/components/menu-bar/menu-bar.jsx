@@ -13,6 +13,8 @@ import ProjectLoader from '../../containers/project-loader.jsx';
 import Menu from '../../containers/menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectSaver from '../../containers/project-saver.jsx';
+import SugarizerSaver from '../../containers/sugarizer-saver.jsx';
+import SugarizerLoader from '../../containers/sugarizer-loader.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {
@@ -242,6 +244,33 @@ const MenuBar = props => (
                 </div>
             </div>
             <Divider className={classNames(styles.divider)} />
+
+			<SugarizerLoader>{(loadProject, loadProps) => (
+				<MenuItem
+					onClick={loadProject}
+					{...loadProps}
+				>
+					<FormattedMessage
+						defaultMessage="Load from Sugarizer"
+						description="Menu bar item for loading a project from your Sugarizer Journal"
+						id="gui.menuBar.loadFromSugarizer"
+					/>
+				</MenuItem>
+			)}</SugarizerLoader>
+			<SugarizerSaver>{(saveProject, saveProps) => (
+				<MenuItem
+					onClick={saveProject}
+					{...saveProps}
+				>
+					<FormattedMessage
+						defaultMessage="Save to Sugarizer"
+						description="Menu bar item for saving a project to your Sugarizer Journal"
+						id="gui.menuBar.saveToSugarizer"
+					/>
+				</MenuItem>
+			)}</SugarizerSaver>
+
+
             <div className={classNames(styles.menuBarItem)}>
                 <MenuBarItemTooltip id="title-field">
                     <input
