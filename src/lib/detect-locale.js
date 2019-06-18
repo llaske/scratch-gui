@@ -13,7 +13,16 @@ import queryString from 'query-string';
  */
 const detectLocale = supportedLocales => {
     let locale = 'en'; // default
-    let browserLocale = window.navigator.userLanguage || window.navigator.language;
+    // HACK: On Sugarizer the locale depend of Sugarizer Settings
+    let sugarizerLocale = null;
+    let sugarizerSettings = window.localStorage.getItem('sugar_settings')
+    if (sugarizerSettings) {
+        sugarizerSettings = JSON.parse(sugarizerSettings);
+        if (sugarizerSettings) {
+            sugarizerLocale = sugarizerSettings.language;
+        }
+    }
+    let browserLocale = sugarizerLocale || window.navigator.userLanguage || window.navigator.language;
     browserLocale = browserLocale.toLowerCase();
     // try to set locale from browserLocale
     if (supportedLocales.includes(browserLocale)) {

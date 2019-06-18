@@ -3,7 +3,7 @@
 @import "../../css/z-index.css";
 
 .menu-bar {
-    display: flex;
+    display: none; /* HACK: In Sugarizer, hide the menu bar */
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: nowrap;

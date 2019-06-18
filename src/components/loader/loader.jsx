@@ -131,6 +131,32 @@ class LoaderComponent extends React.Component {
     }
     componentWillUnmount () {
         clearInterval(this.intervalId);
+        // HACK: In Sugarizer wait the end of "Creating project" window, then launch "Loading project" process
+        var getUrlParameter = function(name) {
+            var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+            return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+        };
+        if (this.props.messageId == "gui.loader.creating" && getUrlParameter("o")) {
+            var found = null;
+            for (var i = 0; i < document.body.getElementsByTagName("span").length; i++){
+                var spanElement = document.getElementsByTagName("span")[i];
+                if (spanElement.innerHTML == "Load from Sugarizer"){
+                    found = spanElement;
+                    break;
+                }
+            }
+            console.log(found?"Injected successfully":"Unable to inject");
+            if (found) {
+                var loadInterval = window.setInterval(function() {
+                    var dataURI = document.getElementById("myBlocks").value;
+                    if (dataURI) {
+                        clearInterval(loadInterval)
+                        found.click();
+                    }
+                }, 500);
+
+            }
+        }
     }
     chooseRandomMessage () {
         let messageNumber;

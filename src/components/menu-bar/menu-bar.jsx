@@ -29,6 +29,10 @@ import SB3Downloader from '../../containers/sb3-downloader.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
+// HACK: In Sugarizer, add two popup menu in the menubar to launch Save project and Load project
+// Both are launched by the activity.js file
+import SugarizerSaver from '../../containers/sugarizer-saver.jsx';
+import SugarizerLoader from '../../containers/sugarizer-loader.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -421,6 +425,28 @@ class MenuBar extends React.Component {
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
+                        <SugarizerLoader>{(loadProject) => (
+                            <MenuItem
+                                onClick={loadProject}
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Load from Sugarizer"
+                                    description="Menu bar item for loading a project from your Sugarizer Journal"
+                                    id="gui.menuBar.loadFromSugarizer"
+                                />
+                            </MenuItem>
+                        )}</SugarizerLoader>
+                        <SugarizerSaver>{(saveProject) => (
+                            <MenuItem
+                                onClick={saveProject}
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Save to Sugarizer"
+                                    description="Menu bar item for saving a project to your Sugarizer Journal"
+                                    id="gui.menuBar.saveToSugarizer"
+                                />
+                            </MenuItem>
+                        )}</SugarizerSaver>
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
                                 [styles.active]: this.props.editMenuOpen
