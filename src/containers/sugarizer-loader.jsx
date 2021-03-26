@@ -47,14 +47,14 @@ class SugarizerLoader extends React.Component {
 		var blob = new Blob([ab], {type: mimeString});
 		var reader = new FileReader();
 		var that = this;
-		reader.addEventListener("loadend", function() {
+		reader.onloadend = function() {
 			that.props.vm.loadProject(reader.result).then(() => {
 				that.props.closeLoadingState();
 			})
 			.catch(error => {
 				that.setState({loadingError: true, errorMessage: error});
 			});
-		});
+		};
 		reader.readAsArrayBuffer(blob);
     }
     render () {

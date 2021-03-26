@@ -27,11 +27,11 @@ class SugarizerSaver extends React.Component {
     saveProject () {
 		this.props.vm.saveProjectSb3().then(content => {
 			var reader = new FileReader();
-			reader.addEventListener("loadend", function() {
+			reader.onloadend = function() {
 				var json = reader.result;
 				document.getElementById("myBlocks").value = json;
 				document.getElementById("myBlocks").click();
-			});
+			};
 			reader.readAsDataURL(content);
 		});
     }

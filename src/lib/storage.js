@@ -23,9 +23,7 @@ class Storage extends ScratchStorage {
         );
         this.addWebSource(
             [this.AssetType.ImageVector, this.AssetType.ImageBitmap, this.AssetType.Sound],
-            ((/iPad|iPhone|iPod/.test(navigator.userAgent)) ?
-            asset => `${ASSET_SERVER}/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/` :
-            asset => `static/internal-assets/${asset.assetId}.${asset.dataFormat}`)
+            (asset => `${ASSET_SERVER}/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/`)
         );
         this.addWebSource(
             [this.AssetType.Sound],
