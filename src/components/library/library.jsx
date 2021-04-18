@@ -144,7 +144,7 @@ class LibraryComponent extends React.Component {
                 >
                     {this.getFilteredData().map((dataItem, index) => {
                         const scratchURL = dataItem.md5 ?
-                            ((/iPad|iPhone|iPod/.test(navigator.userAgent)) ?  `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` : `static/internal-assets/${dataItem.md5}`) :
+                            ((window._isOffline) ? `static/internal-assets/${dataItem.md5}` : `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/`) :
                             dataItem.rawURL;
                         return (
                             <LibraryItem
